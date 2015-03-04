@@ -5,8 +5,8 @@ import org.springframework.stereotype.Service;
 import com.bnpinnovation.calculator.dto.OperationResult;
 
 
-@Service
-public class DefaultCalculator implements CalculatorService {
+@Service("basicCalculator")
+public class BasicCalculator implements CalculatorService {
 
 	private final int NOT_PERMITED_VALUE = 0;
 

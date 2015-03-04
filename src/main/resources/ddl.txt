@@ -1,0 +1,9 @@
+use calculator;
+
+create table operationSummary (
+     id int(10) unsigned not null auto_increment primary key,
+     operationType varchar(1) default '' not null,
+		leftOperand int(10) unsigned default '0' not null,
+		rightOperand int(10) unsigned default '0' not null,
+		result int(10) unsigned default '0' not null,
+		operationDate DATETIME DEFAULT CURRENT_TIMESTAMP);
