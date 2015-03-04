@@ -1,0 +1,26 @@
+<div class="well">
+	<div ng-hide="summary.length == 0">
+		<table class="table">
+			<thread>
+				<tr>
+					<th class="text-center">id</th>
+					<th class="text-center">arg1</th>
+					<th class="text-center">operation</th>
+					<th class="text-center">arg2</th>
+					<th class="text-center">result</th>
+					<th class="text-center">date</th>
+				</tr>
+			</thread>
+			<tbody>
+				<tr ng-repeat="calculation in summary">
+					<td class="text-center">{{calculation.id}}</td>
+					<td class="text-center">{{calculation.leftOperand}}</td>
+					<td class="text-center">{{calculation.operationType}}</td>
+					<td class="text-center">{{calculation.rightOperand}}</td>
+					<td class="text-center">{{calculation.result}}</td>
+					<td class="text-center">{{calculation.operationDate}}</td>
+				</tr>
+			</tbody>
+		</table>
+	</div>
+</div>

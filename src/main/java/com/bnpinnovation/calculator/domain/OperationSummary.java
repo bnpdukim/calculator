@@ -1,7 +1,10 @@
 package com.bnpinnovation.calculator.domain;
 
 import java.io.Serializable;
+import java.text.SimpleDateFormat;
 import java.util.Date;
+
+import com.fasterxml.jackson.annotation.JsonProperty;
 
 public class OperationSummary implements Serializable{
 	private static final long serialVersionUID = 7256543088980883505L;
@@ -46,8 +49,9 @@ public class OperationSummary implements Serializable{
 	public void setResult(int result) {
 		this.result = result;
 	}
-	public Date getOperationDate() {
-		return operationDate;
+	@JsonProperty(value="operationDate")
+	public String getOperationDate() {
+		return  new SimpleDateFormat("yyMMdd HHmmss").format(operationDate);
 	}
 	public void setOperationDate(Date operationDate) {
 		this.operationDate = operationDate;
