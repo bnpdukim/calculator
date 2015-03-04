@@ -30,7 +30,7 @@
 	</bean>
 
 	<bean id="operationSummaryDao" class="org.mybatis.spring.mapper.MapperFactoryBean">
-		<property name="mapperInterface" value="com.bnpinnovation.calculator.dao.CalculatorSummaryDao" />
+		<property name="mapperInterface" value="com.bnpinnovation.calculator.dao.CalculationSummaryDao" />
 		<property name="sqlSessionFactory" ref="sqlSessionFactory" />
 	</bean>
 
