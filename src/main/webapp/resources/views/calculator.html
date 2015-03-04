@@ -6,7 +6,7 @@
 				<span> + </span>
 				<input name="operandRightForPlus" class="input-medium" ng-model="operand.plus.right" ng-pattern="numberPattern" required/>
 				<button class="btn btn-primary" ng-click="plus()" ng-disabled="operandForm.operandLeftForPlus.$invalid || operandForm.operandRightForPlus.$invalid">계산</button>
-				<input name="resultForPlus"/>
+				<input name="resultForPlus" class="input-medium uneditable-input" ng-model="result.plus" disabled/>
 			</div>
 
 			<div class="input-group">
@@ -14,7 +14,7 @@
 				<span> - </span>
 				<input name="operandRightForMinus" class="input-medium" ng-model="operand.minus.right" ng-pattern="numberPattern" required/>
 				<button class="btn btn-primary" ng-click="minus()" ng-disabled="operandForm.operandLeftForMinus.$invalid || operandForm.operandRightForMinus.$invalid">계산</button>
-				<input name="resultForMinus"/>
+				<input name="resultForMinus" class="input-medium uneditable-input" ng-model="result.minus" disabled/>
 			</div>
 
 			<div class="input-group">
@@ -22,7 +22,7 @@
 				<span> * </span>
 				<input name="operandRightForMultiply" class="input-medium" ng-model="operand.multiply.right" ng-pattern="numberPattern" required/>
 				<button class="btn btn-primary" ng-click="multiply()" ng-disabled="operandForm.operandLeftForMultiply.$invalid || operandForm.operandRightForMultiply.$invalid">계산</button>
-				<input name="resultForMultiply"/>
+				<input name="resultForMultiply" class="input-medium uneditable-input" ng-model="result.multiply" disabled/>
 			</div>
 
 			<div class="input-group">
@@ -30,7 +30,7 @@
 				<span> / </span>
 				<input name="operandRightForDivision" class="input-medium" ng-model="operand.division.right" ng-pattern="numberPattern" required/>
 				<button class="btn btn-primary" ng-click="division()" ng-disabled="operandForm.operandLeftForDivision.$invalid || operandForm.operandRightForDivision.$invalid">계산</button>
-				<input name="resultForDivision"/>
+				<input name="resultForDivision" class="input-medium uneditable-input" ng-model="result.division" disabled/>
 			</div>
 		</form>
 	</div>
