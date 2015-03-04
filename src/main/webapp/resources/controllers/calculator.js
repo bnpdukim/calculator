@@ -68,7 +68,7 @@ angular
 			});
 		};
 		
-		$scope.mutiply = function() {
+		$scope.multiply = function() {
 			var req = generationRequest(multiplyURI, $scope.operand.multiply.left, $scope.operand.multiply.right);
 			
 			$http(req)
