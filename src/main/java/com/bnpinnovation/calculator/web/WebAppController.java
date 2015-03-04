@@ -15,8 +15,7 @@ public class WebAppController {
 	private static final Logger logger = LoggerFactory.getLogger(WebAppController.class);
 
 	@RequestMapping(value = "/", method = RequestMethod.GET)
-	public String home() {
+	public String calculator() {
 		return "app";
-	}
-	
+	}	
 }
