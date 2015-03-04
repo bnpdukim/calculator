@@ -1,0 +1,37 @@
+<div>
+	<div class="panel">
+		<form name="operandForm" novalidate>
+			<div class="input-group">
+				<input name="operandLeftForPlus" class="input-medium" ng-model="operand.plus.left" ng-pattern="numberPattern" required/>
+				<span> + </span>
+				<input name="operandRightForPlus" class="input-medium" ng-model="operand.plus.right" ng-pattern="numberPattern" required/>
+				<button class="btn btn-primary" ng-click="plus()" ng-disabled="operandForm.operandLeftForPlus.$invalid || operandForm.operandRightForPlus.$invalid">계산</button>
+				<input name="resultForPlus"/>
+			</div>
+
+			<div class="input-group">
+				<input name="operandLeftForMinus" class="input-medium" ng-model="operand.minus.left" ng-pattern="numberPattern" required/>
+				<span> - </span>
+				<input name="operandRightForMinus" class="input-medium" ng-model="operand.minus.right" ng-pattern="numberPattern" required/>
+				<button class="btn btn-primary" ng-click="minus()" ng-disabled="operandForm.operandLeftForMinus.$invalid || operandForm.operandRightForMinus.$invalid">계산</button>
+				<input name="resultForMinus"/>
+			</div>
+
+			<div class="input-group">
+				<input name="operandLeftForMultiply" class="input-medium" ng-model="operand.multiply.left" ng-pattern="numberPattern" required/>
+				<span> * </span>
+				<input name="operandRightForMultiply" class="input-medium" ng-model="operand.multiply.right" ng-pattern="numberPattern" required/>
+				<button class="btn btn-primary" ng-click="multiply()" ng-disabled="operandForm.operandLeftForMultiply.$invalid || operandForm.operandRightForMultiply.$invalid">계산</button>
+				<input name="resultForMultiply"/>
+			</div>
+
+			<div class="input-group">
+				<input name="operandLeftForDivision" class="input-medium" ng-model="operand.division.left" ng-pattern="numberPattern" required/>
+				<span> / </span>
+				<input name="operandRightForDivision" class="input-medium" ng-model="operand.division.right" ng-pattern="numberPattern" required/>
+				<button class="btn btn-primary" ng-click="division()" ng-disabled="operandForm.operandLeftForDivision.$invalid || operandForm.operandRightForDivision.$invalid">계산</button>
+				<input name="resultForDivision"/>
+			</div>
+		</form>
+	</div>
+</div>

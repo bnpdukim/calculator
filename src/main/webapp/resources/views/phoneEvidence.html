@@ -1,0 +1,40 @@
+<div>
+	<div class="panel">
+		<form name="phoneEvidenceForm" novalidate>
+			<h3 class="panel-heading">폰 정보 인증</h3>
+			
+			<div class="input-group">
+				<label>phone : </label> 
+				<input name="phone" class="input-medium" ng-model="applicationForm.profile.phone" ng-pattern="phonePattern" required/>
+				<button class="btn btn-primary" ng-click="verifyPhoneEvidence()" ng-disabled="phoneEvidenceForm.phone.$invalid">인증요청</button>
+			</div>
+			<br/>
+			
+			<div ng-show="rest.phone.status" ng-hide="!(rest.phone.status)">
+				<div class="input-group">
+					<label>result : </label> 
+					<input name="originSecretCode" class="input-medium uneditable-input"  ng-pattern="^\\d{6}$" ng-model="resultForm.secretCodeForPhone" required  disabled/>
+				</div>		
+				<br/>
+				
+				<div class="input-group">
+					<label>code : </label> 
+					<input name="userSecretCode" class="input-medium" ng-model="userInput.secretCodeForPhone" ng-pattern="resultForm.secretCodeForPhone"required />
+				</div>
+				<br/>
+			</div>
+			
+			<div class="alert alert-info" ng-show="!(rest.phone.status)" ng-hide="rest.phone.status">
+				<span>errorCode : </span>
+				<span>{{rest.phone.error.code}}</span>
+				<br/>
+				<span>errorMessage : </span>
+				<span>{{rest.phone.error.message}}</span>
+			</div>
+			
+			<button class="btn btn-primary" ng-click="beforePhoneEvidence()">이전</button>
+			<button class="btn btn-primary" ng-click="initPhoneEvidence()">스킵</button>
+			<a class="btn btn-primary" href="#/nickname" ng-disabled="phoneEvidenceForm.originSecretCode.$invalid || phoneEvidenceForm.userSecretCode.$invalid">다음</a>
+		</form>
+	</div>
+</div>
