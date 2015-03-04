@@ -25,6 +25,9 @@ public class OperationSummary implements Serializable{
 	public void setOperationType(OperationType operationType) {
 		this.operationType = operationType;
 	}
+	public void setOperationType(String operationSign) {
+		this.operationType = OperationType.valueFor(operationSign);
+	}	
 	public int getLeftOperand() {
 		return leftOperand;
 	}

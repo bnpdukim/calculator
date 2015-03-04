@@ -3,7 +3,7 @@ package com.bnpinnovation.calculator.service;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.bnpinnovation.calculator.dao.CalculatorSummaryDao;
+import com.bnpinnovation.calculator.dao.CalculationSummaryDao;
 import com.bnpinnovation.calculator.domain.OperationSummary;
 import com.bnpinnovation.calculator.domain.OperationType;
 import com.bnpinnovation.calculator.dto.OperationResult;
@@ -14,7 +14,7 @@ public class SummaryCalculator implements CalculatorService {
 	private final int NOT_PERMITED_VALUE = 0;
 
 	@Autowired
-	private CalculatorSummaryDao calculatorSummaryDao;
+	private CalculationSummaryDao calculatorSummaryDao;
 	
 	@Override
 	public OperationResult plus(int leftOperand, int rightOperand) {
