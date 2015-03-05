@@ -291,18 +291,6 @@
 					<artifactId>surefire-junit4</artifactId> <version>2.18.1</version> </dependency> 
 					</dependencies> -->
 			</plugin>
-
-			<plugin>
-				<groupId>org.apache.tomcat.maven</groupId>
-				<artifactId>tomcat7-maven-plugin</artifactId>
-				<version>2.1</version>
-				<configuration>
-					<url>http://${test-server-ip}:${test-server-port}/manager/text</url>
-					<server>signtalkDevelopServer</server>
-					<path>/signtalk</path>
-				</configuration>
-			</plugin>
-
 		</plugins>
     </build>
 </project>
