@@ -9,22 +9,18 @@
 		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-3.2.xsd
 		http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-4.0.xsd">
 	<!-- Rest authentication entry point configuration -->
-	<security:http use-expressions="true"
-		entry-point-ref="restAuthenticationEntryPoint">
-		<security:intercept-url pattern="/**" />
-		<security:form-login
-			authentication-success-handler-ref="mySuccessHandler"
-			authentication-failure-handler-ref="myFailureHandler" />
-
-		<security:logout />
+	<security:http auto-config="true" use-expressions="true">
+		<security:intercept-url pattern="/*" access="hasRole('ROLE_USER')"/>		
 	</security:http>
 
+
+
 	<!-- Connect the custom authentication success handler -->
-	<bean id="mySuccessHandler"
-		class="com.bnpinnovation.calculator.security.RestAuthenticationSuccessHandler" />
+	<!-- <bean id="mySuccessHandler"
+		class="com.bnpinnovation.calculator.security.RestAuthenticationSuccessHandler" /> -->
 	<!-- Using default failure handler -->
-	<bean id="myFailureHandler"
-		class="org.springframework.security.web.authentication.SimpleUrlAuthenticationFailureHandler" />
+	<!-- <bean id="myFailureHandler"
+		class="org.springframework.security.web.authentication.SimpleUrlAuthenticationFailureHandler" /> -->
 
 	<!-- Authentication manager -->
 	<security:authentication-manager alias="authenticationManager">

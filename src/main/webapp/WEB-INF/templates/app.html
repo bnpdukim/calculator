@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org"
-      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3"
-      ng-app="calculator" >
+	xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3"
+	ng-app="calculator">
 <head>
 
 <title>Calculator</title>
@@ -14,36 +14,52 @@
 	}
 </script>
 <script>
-	angular.module("calculator", [ "ngRoute","user" ]).constant("context", getCtx())
-			.config(function($routeProvider,context) {
-				$routeProvider.when("/calculator", {
-					templateUrl : context+"/resources/views/calculator.html"
-				});
-				$routeProvider.when("/summary", {
-					templateUrl : context+"/resources/views/summary.html"
-				});
-				$routeProvider.otherwise({
-					templateUrl : context+"/resources/views/calculator.html"
-				});
-			});
+	angular.module("calculator", [ "ngRoute" ]).constant("context",
+			getCtx()).config(function($routeProvider, context) {
+		$routeProvider.when("/calculator", {
+			templateUrl : context + "/resources/views/calculator.html"
+		});
+		$routeProvider.when("/summary", {
+			templateUrl : context + "/resources/views/summary.html"
+		});
+		$routeProvider.otherwise({
+			templateUrl : context + "/resources/views/calculator.html"
+		});
+	});
 </script>
 <script th:src="@{/resources/controllers/calculator.js}"></script>
 <script th:src="@{/resources/ngmodules/angular-route.js}"></script>
-<script th:src="@{/resources/components/user/user.js}"></script>
+<style type="text/css">
+	.navbar-right { float: right !important; margin-right: 5px;}
+	.navbar-text { color:#000000; margin-right: 20px; }
+</style>
 
 
 </head>
 <body ng-controller="calculatorCtrl">
 	<div class="navbar navbar-inverse">
 		<a class="navbar-brand" href="#">Calculator</a>
-
-		<div user-summary="'resources/components/user/userSummary.html'"/>
+		
+		<div class="navbar-right">
+			<div class="navbar-text">
+				Logged user: <span sec:authentication="name"></span>
+				Roles: 
+					<span sec:authentication="principal.authorities">[ROLE_USER, ROLE_ADMIN]</span>
+			</div>
+			<div>
+				<form action="#" th:action="@{/j_spring_security_logout}" method="post">
+					<button type="submit">Logout</button>
+				</form>
+			</div>
+		</div>
 	</div>
 
 	<div class="col-sm-2">
 		<a class="btn btn-block btn-default btn-lg" href="#/calculator">계산기</a>
+		
 		<button class="btn btn-block btn-default btn-lg"
-			ng-click="querySummary()">요약</button>
+				ng-click="querySummary()">요약</button>
+		
 	</div>
 	<div class="col-sm-10">
 		<div ng-view='' />
