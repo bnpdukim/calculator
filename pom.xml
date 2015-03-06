@@ -79,7 +79,27 @@
 			<artifactId>spring-oxm</artifactId>
 			<version>${springframework-version}</version>
 		</dependency>
-		
+
+		<!-- security -->
+		<dependency>
+			<groupId>org.springframework.security</groupId>
+			<artifactId>spring-security-core</artifactId>
+			<version>3.2.6.RELEASE</version>
+		</dependency>
+
+		<dependency>
+			<groupId>org.springframework.security</groupId>
+			<artifactId>spring-security-web</artifactId>
+			<version>3.2.6.RELEASE</version>
+		</dependency>
+
+		<dependency>
+			<groupId>org.springframework.security</groupId>
+			<artifactId>spring-security-config</artifactId>
+			<version>3.2.6.RELEASE</version>
+		</dependency>
+
+
 		<!-- weaver -->
 		<dependency>
 			<groupId>org.aspectj</groupId>
@@ -203,20 +223,20 @@
 			<artifactId>commons-dbcp</artifactId>
 			<version>1.4</version>
 		</dependency>
-		
+
 		<!-- mybatis -->
 		<dependency>
 			<groupId>org.mybatis</groupId>
 			<artifactId>mybatis</artifactId>
 			<version>3.2.8</version>
 		</dependency>
-		
+
 		<dependency>
 			<groupId>org.mybatis</groupId>
 			<artifactId>mybatis-spring</artifactId>
 			<version>1.2.2</version>
 		</dependency>
-				
+
 
 		<!-- json -->
 		<dependency>
@@ -251,6 +271,8 @@
 			<artifactId>thymeleaf-spring4</artifactId>
 			<version>2.1.4.RELEASE</version>
 		</dependency>
+		
+		
 	</dependencies>
 
 
@@ -292,5 +314,5 @@
 					</dependencies> -->
 			</plugin>
 		</plugins>
-    </build>
+	</build>
 </project>

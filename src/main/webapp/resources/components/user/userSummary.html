@@ -1,0 +1,16 @@
+<style>
+	.navbar-right { float: right !important; margin-right: 5px;}
+	.navbar-text { margin-right: 10px; }
+</style>
+
+<div class="navbar-right">
+	<div class="navbar-text" ng-hide="user.auth">
+		<label for="j_username">Username</label>: <input type="text" ng-model="user.id" />  
+		<label for="j_password">Password</label>: <input type="password" ng-model="user.password" /> 
+		<button class="btn btn-default navbar-btn" ng-click="login()">LogIn</button>
+	</div>
+	<div class="navbar-text" ng-hide="!(user.auth)">
+			{{user.id}}/{{user.role}}
+			<button class="btn btn-default navbar-btn" ng-click="logout()">LogOut</button>
+	</div>
+</div>

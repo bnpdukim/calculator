@@ -1,5 +1,7 @@
 <!DOCTYPE html>
-<html ng-app="calculator">
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3"
+      ng-app="calculator" >
 <head>
 
 <title>Calculator</title>
@@ -12,35 +14,39 @@
 	}
 </script>
 <script>
-	angular.module("calculator", [ "ngRoute" ]).constant("context", getCtx())
-			.config(function($routeProvider) {
+	angular.module("calculator", [ "ngRoute","user" ]).constant("context", getCtx())
+			.config(function($routeProvider,context) {
 				$routeProvider.when("/calculator", {
-					templateUrl : "resources/views/calculator.html"
+					templateUrl : context+"/resources/views/calculator.html"
 				});
 				$routeProvider.when("/summary", {
-					templateUrl : "resources/views/summary.html"
+					templateUrl : context+"/resources/views/summary.html"
 				});
 				$routeProvider.otherwise({
-					templateUrl : "resources/views/calculator.html"
+					templateUrl : context+"/resources/views/calculator.html"
 				});
 			});
 </script>
 <script th:src="@{/resources/controllers/calculator.js}"></script>
 <script th:src="@{/resources/ngmodules/angular-route.js}"></script>
+<script th:src="@{/resources/components/user/user.js}"></script>
 
 
 </head>
 <body ng-controller="calculatorCtrl">
 	<div class="navbar navbar-inverse">
 		<a class="navbar-brand" href="#">Calculator</a>
+
+		<div user-summary="'resources/components/user/userSummary.html'"/>
 	</div>
-	
-	<div class="col-xs-1">
+
+	<div class="col-sm-2">
 		<a class="btn btn-block btn-default btn-lg" href="#/calculator">계산기</a>
-		<button class="btn btn-block btn-default btn-lg" ng-click="querySummary()">요약</button>  
+		<button class="btn btn-block btn-default btn-lg"
+			ng-click="querySummary()">요약</button>
 	</div>
-	<div class="col-xs-5">
-		<div ng-view=''/>
+	<div class="col-sm-10">
+		<div ng-view='' />
 	</div>
 
 </body>

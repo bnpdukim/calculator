@@ -1,10 +1,10 @@
 angular
 .module("calculator")
-.constant("plusURI", "/operand/plus")
-.constant("minusURI", "/operand/minus")
-.constant("multiplyURI", "/operand/multiply")
-.constant("divisionURI", "/operand/division")
-.constant("summaryURI", "/summary")
+.constant("plusURI", "/operation/plus")
+.constant("minusURI", "/operation/minus")
+.constant("multiplyURI", "/operation/multiply")
+.constant("divisionURI", "/operation/division")
+.constant("summaryURI", "/operation/summary")
 .controller("calculatorCtrl", 
 	function($scope, $location, $http, context, plusURI, minusURI, multiplyURI, divisionURI, summaryURI) {
 		$scope.numberPattern = new RegExp("^\\d*$");
