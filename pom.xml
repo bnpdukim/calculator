@@ -6,7 +6,7 @@
 	<artifactId>calculator</artifactId>
 	<name>Calculator</name>
 	<packaging>war</packaging>
-	<version>1.0.2-BUILD-SNAPSHOT</version>
+	<version>1.0.3-BUILD-SNAPSHOT</version>
 	<properties>
 		<java-version>1.8</java-version>
 		<springframework-version>4.0.9.RELEASE</springframework-version>
@@ -79,7 +79,27 @@
 			<artifactId>spring-oxm</artifactId>
 			<version>${springframework-version}</version>
 		</dependency>
-		
+
+		<!-- security -->
+		<dependency>
+			<groupId>org.springframework.security</groupId>
+			<artifactId>spring-security-core</artifactId>
+			<version>3.2.6.RELEASE</version>
+		</dependency>
+
+		<dependency>
+			<groupId>org.springframework.security</groupId>
+			<artifactId>spring-security-web</artifactId>
+			<version>3.2.6.RELEASE</version>
+		</dependency>
+
+		<dependency>
+			<groupId>org.springframework.security</groupId>
+			<artifactId>spring-security-config</artifactId>
+			<version>3.2.6.RELEASE</version>
+		</dependency>
+
+
 		<!-- weaver -->
 		<dependency>
 			<groupId>org.aspectj</groupId>
@@ -203,20 +223,20 @@
 			<artifactId>commons-dbcp</artifactId>
 			<version>1.4</version>
 		</dependency>
-		
+
 		<!-- mybatis -->
 		<dependency>
 			<groupId>org.mybatis</groupId>
 			<artifactId>mybatis</artifactId>
 			<version>3.2.8</version>
 		</dependency>
-		
+
 		<dependency>
 			<groupId>org.mybatis</groupId>
 			<artifactId>mybatis-spring</artifactId>
 			<version>1.2.2</version>
 		</dependency>
-				
+
 
 		<!-- json -->
 		<dependency>
@@ -251,6 +271,15 @@
 			<artifactId>thymeleaf-spring4</artifactId>
 			<version>2.1.4.RELEASE</version>
 		</dependency>
+
+		<dependency>
+			<groupId>org.thymeleaf.extras</groupId>
+			<artifactId>thymeleaf-extras-springsecurity3</artifactId>
+			<version>2.1.1.RELEASE</version>
+		</dependency>
+
+
+
 	</dependencies>
 
 
@@ -291,18 +320,6 @@
 					<artifactId>surefire-junit4</artifactId> <version>2.18.1</version> </dependency> 
 					</dependencies> -->
 			</plugin>
-
-			<plugin>
-				<groupId>org.apache.tomcat.maven</groupId>
-				<artifactId>tomcat7-maven-plugin</artifactId>
-				<version>2.1</version>
-				<configuration>
-					<url>http://${test-server-ip}:${test-server-port}/manager/text</url>
-					<server>signtalkDevelopServer</server>
-					<path>/signtalk</path>
-				</configuration>
-			</plugin>
-
 		</plugins>
-    </build>
+	</build>
 </project>
