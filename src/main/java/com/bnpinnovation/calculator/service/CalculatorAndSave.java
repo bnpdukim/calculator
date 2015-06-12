@@ -1,28 +1,32 @@
 package com.bnpinnovation.calculator.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
-import com.bnpinnovation.calculator.dao.CalculationSummaryDao;
-import com.bnpinnovation.calculator.domain.OperationSummary;
+import com.bnpinnovation.calculator.dao.CalculatorDao;
+import com.bnpinnovation.calculator.domain.CalculatorOperation;
 import com.bnpinnovation.calculator.domain.OperationType;
 import com.bnpinnovation.calculator.dto.OperationResult;
 
 
-@Service("summaryCalculator")
-public class SummaryCalculator implements CalculatorService {
+@Service("calculatorAndSave")
+@Transactional
+@PreAuthorize("hasAnyRole('ROLE_ADMIN', 'ROLE_USER')")
+public class CalculatorAndSave implements CalculatorService {
 	private final int NOT_PERMITED_VALUE = 0;
 
 	@Autowired
-	private CalculationSummaryDao calculatorSummaryDao;
+	private CalculatorDao calculatorSummaryDao;
 	
 	@Override
 	public OperationResult plus(int leftOperand, int rightOperand) {
 		OperationResult result = new OperationResult();
 		result.setValue(leftOperand + rightOperand);
 		
-		OperationSummary summary = createSummary(leftOperand, rightOperand,OperationType.PLUS,result);
-		calculatorSummaryDao.insertOperationSummary( summary );
+		CalculatorOperation summary = createSummary(leftOperand, rightOperand,OperationType.PLUS,result);
+		calculatorSummaryDao.insertCalculatorOperation( summary );
 		
 		return result;
 	}
@@ -33,8 +37,8 @@ public class SummaryCalculator implements CalculatorService {
 		OperationResult result = new OperationResult();
 		result.setValue(leftOperand - rightOperand);
 		
-		OperationSummary summary = createSummary(leftOperand, rightOperand,OperationType.MINUS,result);
-		calculatorSummaryDao.insertOperationSummary( summary );
+		CalculatorOperation summary = createSummary(leftOperand, rightOperand,OperationType.MINUS,result);
+		calculatorSummaryDao.insertCalculatorOperation( summary );
 		
 		return result;
 	}
@@ -44,8 +48,8 @@ public class SummaryCalculator implements CalculatorService {
 		OperationResult result = new OperationResult();
 		result.setValue(leftOperand * rightOperand);
 		
-		OperationSummary summary = createSummary(leftOperand, rightOperand,OperationType.MULTIPLY,result);
-		calculatorSummaryDao.insertOperationSummary( summary );
+		CalculatorOperation summary = createSummary(leftOperand, rightOperand,OperationType.MULTIPLY,result);
+		calculatorSummaryDao.insertCalculatorOperation( summary );
 		
 		return result;
 	}
@@ -59,14 +63,14 @@ public class SummaryCalculator implements CalculatorService {
 			result.setValue(0);
 		}
 		
-		OperationSummary summary = createSummary(leftOperand, rightOperand,OperationType.DIVISION,result);
-		calculatorSummaryDao.insertOperationSummary( summary );
+		CalculatorOperation summary = createSummary(leftOperand, rightOperand,OperationType.DIVISION,result);
+		calculatorSummaryDao.insertCalculatorOperation( summary );
 		return result;
 	}
 	
-	private OperationSummary createSummary(int leftOperand, int rightOperand,
+	private CalculatorOperation createSummary(int leftOperand, int rightOperand,
 			OperationType operationType, OperationResult result) {
-		OperationSummary summary = new OperationSummary();
+		CalculatorOperation summary = new CalculatorOperation();
 		summary.setOperationType(operationType);
 		summary.setLeftOperand(leftOperand);
 		summary.setRightOperand(rightOperand);

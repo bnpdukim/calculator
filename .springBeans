@@ -8,9 +8,10 @@
 	<enableImports><![CDATA[true]]></enableImports>
 	<configs>
 		<config>src/main/webapp/WEB-INF/spring/appServlet/webAppContext.xml</config>
+		<config>src/main/resources/META-INF/spring/restSecurity.xml</config>
 	</configs>
 	<autoconfigs>
-		<config>src/test/resources/META-INF/spring/applicationContext.xml</config>
+		<config>src/main/resources/META-INF/spring/applicationContext.xml</config>
 	</autoconfigs>
 	<configSets>
 	</configSets>

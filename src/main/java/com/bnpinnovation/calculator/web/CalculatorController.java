@@ -1,6 +1,6 @@
 package com.bnpinnovation.calculator.web;
 
-import java.util.List;
+import java.util.Set;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -14,9 +14,9 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.ResponseStatus;
 
-import com.bnpinnovation.calculator.domain.OperationSummary;
 import com.bnpinnovation.calculator.dto.Operand;
 import com.bnpinnovation.calculator.dto.OperationResult;
+import com.bnpinnovation.calculator.dto.OperationSummary;
 import com.bnpinnovation.calculator.service.CalculatorService;
 import com.bnpinnovation.calculator.service.CalculatorSummaryService;
 
@@ -26,7 +26,7 @@ public class CalculatorController {
 	private static final Logger logger = LoggerFactory.getLogger(CalculatorController.class);
 	
 	@Autowired
-	@Qualifier("summaryCalculator")
+	@Qualifier("calculatorAndSave")
 //	@Qualifier("basicCalculator")
 	private CalculatorService calculator;
 	@Autowired
@@ -64,7 +64,7 @@ public class CalculatorController {
 	@RequestMapping(value = "/summary", method = RequestMethod.GET, produces="application/json", consumes="application/json")
 	@ResponseStatus(value = HttpStatus.OK)
 	@ResponseBody
-	public List<OperationSummary> summary() {
-		return calculatorSummaryService.queryCalculatorSummary();
+	public Set<OperationSummary> summary() {
+		return calculatorSummaryService.calculationSummary();
 	}
 }

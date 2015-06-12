@@ -42,14 +42,59 @@
 		
 		<div class="navbar-right">
 			<div class="navbar-text">
-				Logged user: <span sec:authentication="name"></span>
-				Roles: 
-					<span sec:authentication="principal.authorities">[ROLE_USER, ROLE_ADMIN]</span>
+				<div class="input-group">
+					<label>ID : </label><input name="userId" class="input-medium" ng-model="user.id" />
+					<br/>
+					<label>PW : </label><input name="userPw" class="input-medium" ng-model="user.password" />
+				</div>
 			</div>
-			<div>
-				<form action="#" th:action="@{/j_spring_security_logout}" method="post">
-					<button type="submit">Logout</button>
-				</form>
+			
+			<div class="navbar-text">
+				<button class="btn btn-primary" ng-click="authToken()">인증</button>
+				<br/>
+				 
+				<label>access_token : </label>
+				<input class="input-medium uneditable-input" ng-model="login.access_token" ng-disabled="true"/>
+				<br/>
+				
+				<label>token_type : </label>
+				<input class="input-medium uneditable-input" ng-model="login.token_type" ng-disabled="true"/>
+				<br/>
+				
+				<label>refresh_token : </label>
+				<input class="input-medium uneditable-input" ng-model="login.refresh_token" ng-disabled="true"/>
+				<br/>				
+				
+				<label>expires_in : </label>
+				<input class="input-medium uneditable-input" ng-model="login.expires_in" ng-disabled="true"/>
+				<br/>
+				
+				<label>scope : </label>
+				<input class="input-medium uneditable-input" ng-model="login.scope" ng-disabled="true"/>
+			</div>
+		
+			<div class="navbar-text">
+				<button class="btn btn-primary" ng-click="refreshToken()">리프레쉬</button>
+				<br/>
+				 
+				<label>access_token : </label>
+				<input class="input-medium uneditable-input" ng-model="refresh.access_token" ng-disabled="true"/>
+				<br/>
+				
+				<label>token_type : </label>
+				<input class="input-medium uneditable-input" ng-model="refresh.token_type" ng-disabled="true"/>
+				<br/>
+				
+				<label>refresh_token : </label>
+				<input class="input-medium uneditable-input" ng-model="refresh.refresh_token" ng-disabled="true"/>
+				<br/>				
+				
+				<label>expires_in : </label>
+				<input class="input-medium uneditable-input" ng-model="refresh.expires_in" ng-disabled="true"/>
+				<br/>
+				
+				<label>scope : </label>
+				<input class="input-medium uneditable-input" ng-model="refresh.scope" ng-required="true" ng-disabled="true"/>
 			</div>
 		</div>
 	</div>
