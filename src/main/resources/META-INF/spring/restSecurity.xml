@@ -66,7 +66,7 @@
 		use-expressions="true"
 		xmlns="http://www.springframework.org/schema/security" >
 		<anonymous enabled="false" />
-		<!-- <intercept-url pattern="/operation/**" access="hasAnyRole('ROLE_USER', 'ROLE_ADMIN')" /> -->
+		<intercept-url pattern="/operation/**" access="hasRole('ROLE_USER')" />
 		<custom-filter ref="resourceServerFilter" before="PRE_AUTH_FILTER" />
 		<access-denied-handler ref="oauthAccessDeniedHandler" />
 	</http>
@@ -84,7 +84,8 @@
 		<constructor-arg>
 			<list>
 				<bean class="org.springframework.security.oauth2.provider.vote.ScopeVoter" />
-				<bean class="org.springframework.security.access.vote.RoleVoter" />
+				<!-- <bean class="org.springframework.security.access.vote.RoleVoter" /> -->
+				<bean class="org.springframework.security.web.access.expression.WebExpressionVoter" />
 				<bean class="org.springframework.security.access.vote.AuthenticatedVoter" />
 			</list>
 		</constructor-arg>
