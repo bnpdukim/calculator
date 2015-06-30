@@ -13,6 +13,8 @@
 		<aspectj-version>1.8.4</aspectj-version>
 		<slf4j-version>1.7.9</slf4j-version>
 		<json-jackson>2.4.4</json-jackson>
+		<hibernate-version>4.3.9.Final</hibernate-version>
+		<spring-security-version>3.2.6.RELEASE</spring-security-version>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<project.reporting.outputencoding>UTF-8</project.reporting.outputencoding>
 	</properties>
@@ -84,19 +86,19 @@
 		<dependency>
 			<groupId>org.springframework.security</groupId>
 			<artifactId>spring-security-core</artifactId>
-			<version>3.2.6.RELEASE</version>
+			<version>${spring-security-version}</version>
 		</dependency>
 
 		<dependency>
 			<groupId>org.springframework.security</groupId>
 			<artifactId>spring-security-web</artifactId>
-			<version>3.2.6.RELEASE</version>
+			<version>${spring-security-version}</version>
 		</dependency>
 
 		<dependency>
 			<groupId>org.springframework.security</groupId>
 			<artifactId>spring-security-config</artifactId>
-			<version>3.2.6.RELEASE</version>
+			<version>${spring-security-version}</version>
 		</dependency>
 
 
@@ -224,17 +226,17 @@
 			<version>1.4</version>
 		</dependency>
 
-		<!-- mybatis -->
+		<!-- hibernate -->
 		<dependency>
-			<groupId>org.mybatis</groupId>
-			<artifactId>mybatis</artifactId>
-			<version>3.2.8</version>
+			<groupId>org.hibernate</groupId>
+			<artifactId>hibernate-entitymanager</artifactId>
+			<version>${hibernate-version}</version>
 		</dependency>
 
 		<dependency>
-			<groupId>org.mybatis</groupId>
-			<artifactId>mybatis-spring</artifactId>
-			<version>1.2.2</version>
+			<groupId>org.hibernate</groupId>
+			<artifactId>hibernate-core</artifactId>
+			<version>${hibernate-version}</version>
 		</dependency>
 
 
@@ -277,9 +279,11 @@
 			<artifactId>thymeleaf-extras-springsecurity3</artifactId>
 			<version>2.1.1.RELEASE</version>
 		</dependency>
-
-
-
+		<dependency>
+			<groupId>org.springframework.security.oauth</groupId>
+			<artifactId>spring-security-oauth2</artifactId>
+			<version>2.0.7.RELEASE</version>
+		</dependency>
 	</dependencies>
 
 

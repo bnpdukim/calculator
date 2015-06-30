@@ -1,38 +1,55 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <beans xmlns="http://www.springframework.org/schema/beans"
 	xmlns:context="http://www.springframework.org/schema/context"
-	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:aop="http://www.springframework.org/schema/aop"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:aop="http://www.springframework.org/schema/aop"
 	xmlns:task="http://www.springframework.org/schema/task"
+	xmlns:tx="http://www.springframework.org/schema/tx"
 	xsi:schemaLocation="http://www.springframework.org/schema/task http://www.springframework.org/schema/task/spring-task-4.0.xsd
 		http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.2.xsd
 		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-3.2.xsd
-		http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-4.0.xsd">
+		http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-4.0.xsd
+		http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-4.0.xsd">
 
 	<bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource"
 		destroy-method="close">
 		<property name="driverClassName" value="com.mysql.jdbc.Driver" />
 		<property name="url" value="jdbc:mysql://localhost:3306/calculator" />
-		<property name="username" value="bnp" />
-		<property name="password" value="bnp@1234" />
 	</bean>
 
-	<!-- mybatis setting -->
-	<bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
-		<property name="typeAliasesPackage" value="com.bnpinnovation.calculator.domain" />
-		<property name="dataSource" ref="dataSource" />
-		<property name="configLocation" value="classpath:/mybatis-config.xml" />
-		<!-- <property name="mapperLocations"> <array> <value>classpath*:/META-INF/mybatis/*.xml</value> 
-			</array> </property> -->
+	<bean id="sessionFactory"
+		class="org.springframework.orm.hibernate4.LocalSessionFactoryBean">
+		<property name="dataSource" ref="dataSource"></property>
+		<property name="packagesToScan" value="com.bnpinnovation.calculator.domain" />
+		<property name="hibernateProperties">
+			<props>
+				<prop key="hibernate.dialect">org.hibernate.dialect.MySQL5InnoDBDialect</prop>
+				<prop key="hibernate.show_sql">true</prop>
+				<prop key="hibernate.current_session_context_class">
+					org.springframework.orm.hibernate4.SpringSessionContext
+				</prop>
+				<prop key="hibernate.hbm2ddl.auto">create</prop>
+				<prop key="hibernate.hbm2ddl.import_files">/META-INF/initial/auth.sql</prop>				
+				<prop key="hibernate.connection.characterEncoding">UTF-8</prop>
+                <prop key="hibernate.connection.useUnicode">true</prop>
+                <prop key="hibernate.connection.CharSet">UTF-8</prop>
+			</props>
+		</property>
 	</bean>
 
-	<bean id="sqlSession" class="org.mybatis.spring.SqlSessionTemplate">
-		<constructor-arg name="sqlSessionFactory" ref="sqlSessionFactory" />
+	<bean id="persistenceExceptionTranslationPostProcessor"
+		class="org.springframework.dao.annotation.PersistenceExceptionTranslationPostProcessor" />
+
+
+	<bean id="txManager"
+		class="org.springframework.orm.hibernate4.HibernateTransactionManager">
+
+		<property name="sessionFactory" ref="sessionFactory" />
 	</bean>
 
-	<bean id="operationSummaryDao" class="org.mybatis.spring.mapper.MapperFactoryBean">
-		<property name="mapperInterface" value="com.bnpinnovation.calculator.dao.CalculationSummaryDao" />
-		<property name="sqlSessionFactory" ref="sqlSessionFactory" />
-	</bean>
+	<tx:annotation-driven transaction-manager="txManager" />
 
-	<context:component-scan base-package="com.bnpinnovation.calculator.service" />
+	<context:component-scan base-package="com.bnpinnovation.calculator.service, com.bnpinnovation.calculator.dao.hibernate">
+		<context:exclude-filter type="aspectj" expression="com.bnpinnovation.calculator.service.security.*"/>
+	</context:component-scan>
 </beans>

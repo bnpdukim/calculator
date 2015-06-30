@@ -1,11 +1,12 @@
 package com.bnpinnovation.calculator.service;
 
-import java.util.List;
+import java.util.Set;
 
-import com.bnpinnovation.calculator.domain.OperationSummary;
+import com.bnpinnovation.calculator.domain.CalculatorOperation;
+import com.bnpinnovation.calculator.dto.OperationSummary;
 
 public interface CalculatorSummaryService {
 
-	List<OperationSummary> queryCalculatorSummary();
+	Set<OperationSummary> calculationSummary();
 
 }
