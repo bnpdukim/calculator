@@ -90,7 +90,7 @@
 	</bean>
 	
 	<bean id="oauthAccessDeniedHandler"
-		class="org.springframework.security.oauth2.provider.error.OAuth2AccessDeniedHandler"/>
+		class="org.springframework.security.oauth2.provider.error.OAuth2AccessDeniedHandler" />
 		
 	
 	<!-- Protected resources -->
@@ -136,13 +136,8 @@
 
 
 	<!-- Token Store -->
-	<!-- <bean id="tokenStore"
-		class="org.springframework.security.oauth2.provider.token.store.JdbcTokenStore">
-		<constructor-arg name="dataSource" ref="dataSource" />
-	</bean> -->
-	
 	<bean id="tokenStore"
-		class="org.springframework.security.oauth2.provider.token.store.InMemoryTokenStore" />		
+		class="org.springframework.security.oauth2.provider.token.store.InMemoryTokenStore" />
 
 	<bean id="tokenServices"
 		class="org.springframework.security.oauth2.provider.token.DefaultTokenServices">

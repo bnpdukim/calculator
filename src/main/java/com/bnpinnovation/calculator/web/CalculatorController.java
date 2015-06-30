@@ -1,5 +1,6 @@
 package com.bnpinnovation.calculator.web;
 
+import java.security.Principal;
 import java.util.Set;
 
 import org.slf4j.Logger;
@@ -7,6 +8,8 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.http.HttpStatus;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.GrantedAuthority;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -35,7 +38,12 @@ public class CalculatorController {
 	@RequestMapping(value = "/plus", method = RequestMethod.POST, produces="application/json", consumes="application/json")
 	@ResponseStatus(value = HttpStatus.OK)
 	@ResponseBody
-	public OperationResult plus(@RequestBody Operand operand) {
+	public OperationResult plus(@RequestBody Operand operand, Principal principal, Authentication authentication ) {
+		logger.info(principal.getName());
+		for(GrantedAuthority auth : authentication.getAuthorities() ) {
+			logger.info(auth.getAuthority());
+		}
+		
 		return calculator.plus(operand.getLeftOperand(), operand.getRightOperand());
 	}
 	

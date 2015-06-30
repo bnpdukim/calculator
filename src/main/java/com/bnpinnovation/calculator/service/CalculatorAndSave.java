@@ -13,7 +13,7 @@ import com.bnpinnovation.calculator.dto.OperationResult;
 
 @Service("calculatorAndSave")
 @Transactional
-@PreAuthorize("hasAnyRole('ROLE_ADMIN', 'ROLE_USER')")
+@PreAuthorize("hasAnyRole('ROLE_USER')")
 public class CalculatorAndSave implements CalculatorService {
 	private final int NOT_PERMITED_VALUE = 0;
 

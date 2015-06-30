@@ -1,10 +1,11 @@
 angular.module("calculator").constant("plusURI", "/operation/plus").constant(
 		"minusURI", "/operation/minus").constant("multiplyURI",
 		"/operation/multiply").constant("divisionURI", "/operation/division")
+		.constant("clientKey", "N2I1YTM4NzA1ZDdiMzU2MjY1NTkyNTQwNmE2NTJlM2E6NjU1ZjUyMzEyODIxMmQ2ZTcwNjM0NDQ2MjI0YzJhNDk=")
 		.constant("summaryURI", "/operation/summary").constant("oauthURI", "/oauth/token").controller(
 				"calculatorCtrl",
 				function($scope, $location, $http, context, oauthURI, plusURI, minusURI,
-						multiplyURI, divisionURI, summaryURI) {
+						multiplyURI, divisionURI, summaryURI, clientKey) {
 					$scope.numberPattern = new RegExp("^\\d*$");
 
 					$scope.result = {};
@@ -22,7 +23,7 @@ angular.module("calculator").constant("plusURI", "/operation/plus").constant(
 
 					$scope.authToken = function() {
 						var req = generationAuthenticationRequest(oauthURI,
-								'my-trusted-client',
+								clientKey,
 								$scope.user.id,
 								$scope.user.password);
 
@@ -42,7 +43,7 @@ angular.module("calculator").constant("plusURI", "/operation/plus").constant(
 						console.log('clicked refresh');
 						
 						var req = generationRefreshRequest(oauthURI,
-								'my-trusted-client',
+								clientKey,
 								$scope.login.refresh_token);
 
 						console.log(req);
@@ -127,15 +128,16 @@ angular.module("calculator").constant("plusURI", "/operation/plus").constant(
 					};
 
 					var generationAuthenticationRequest = function(oauthURI,
-							clientId, username, password) {
+							clientKey, username, password) {
 						var req = {
 							method : 'POST',
 							url : context + oauthURI,
 							headers : {
 								'Content-Type' : 'application/json',
-								'Accept' : 'application/json'
+								'Accept' : 'application/json',
+								'Authorization' : 'Basic '+ clientKey
 							},
-							params:{'grant_type':'password', 'client_id':clientId,'username':username, 'password':password}
+							params:{'grant_type':'password', 'username':username, 'password':password}
 						};
 
 						return req;
@@ -148,9 +150,10 @@ angular.module("calculator").constant("plusURI", "/operation/plus").constant(
 							url : context + oauthURI,
 							headers : {
 								'Content-Type' : 'application/json',
-								'Accept' : 'application/json'
+								'Accept' : 'application/json',
+								'Authorization' : 'Basic '+ clientKey
 							},
-							params:{'grant_type':'refresh_token', 'client_id':clientId,'refresh_token':refreshToken}
+							params:{'grant_type':'refresh_token', 'refresh_token':refreshToken}
 						};
 
 						return req;
@@ -165,9 +168,9 @@ angular.module("calculator").constant("plusURI", "/operation/plus").constant(
 							url : context + operationURI,
 							headers : {
 								'Content-Type' : 'application/json',
-								'Accept' : 'application/json'
+								'Accept' : 'application/json',
+								'Authorization' : 'Bearer ' + accessToken
 							},
-							params:{'access_token':accessToken},
 							data : {}
 						};
 
@@ -186,9 +189,9 @@ angular.module("calculator").constant("plusURI", "/operation/plus").constant(
 							url : context + summaryURI,
 							headers : {
 								'Content-Type' : 'application/json',
-								'Accept' : 'application/json'
-							},
-							params:{'access_token':accessToken}
+								'Accept' : 'application/json',
+								'Authorization' : 'Bearer ' + accessToken
+							}
 						};
 					};
 				});
